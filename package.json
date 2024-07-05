@@ -6,8 +6,19 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@popperjs/core": "^2.11.6",
         "axios": "^1.6.4",
+        "bootstrap": "^5.2.3",
         "laravel-vite-plugin": "^1.0",
+        "sass": "^1.56.1",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.5.2",
+        "datatables.net-bs5": "^2.0.8",
+        "datatables.net-buttons-bs5": "^3.0.2",
+        "jquery": "^3.7.1",
+        "jszip": "^3.10.1",
+        "pdfmake": "^0.2.10"
     }
 }
