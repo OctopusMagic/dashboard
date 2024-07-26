@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use ZipArchive;
 
 class DteController extends Controller
 {
@@ -61,4 +62,62 @@ class DteController extends Controller
         $response = Http::post("http://localhost:8000/contingencia/auto");
         return $response->json();
     }
+
+    public function compileAndDownload(Request $request)
+    {
+        $fecha_inicio = $request->input('fecha_inicio');
+        $fecha_fin = $request->input('fecha_fin');
+
+        // Realizar la solicitud al backend para obtener los datos
+        $response = Http::get("http://localhost:8000/dtes/?fecha_inicio={$fecha_inicio}&fecha_fin={$fecha_fin}");
+        $dtes = $response->json();
+
+        // Convertir las fechas al formato ddmmyy
+        $fecha_inicio_formateada = \DateTime::createFromFormat('Y-m-d\TH:i', $fecha_inicio)->format('dmY');
+        $fecha_fin_formateada = \DateTime::createFromFormat('Y-m-d\TH:i', $fecha_fin)->format('dmY');
+
+        // Crear y abrir el archivo ZIP
+        $zip = new \ZipArchive();
+        $zipFileName = "dtes_{$fecha_inicio_formateada}_{$fecha_fin_formateada}.zip";
+        $zipFilePath = storage_path("app/public/{$zipFileName}");
+
+        if ($zip->open($zipFilePath, \ZipArchive::CREATE) === TRUE) {
+            // Recorrer los DTEs y agregar archivos al ZIP
+            foreach ($dtes as $dte) {
+                $codGeneracion = $dte['codGeneracion'];
+                $fhProcesamiento = $dte['fhProcesamiento'];
+                $fechaProcesamiento = (new \DateTime($fhProcesamiento))->format('Y-m-d');
+                $directory = 'public/dtes/' . $codGeneracion;
+
+                // URLs de los archivos
+                $files = [
+                    "{$directory}/{$codGeneracion}.pdf",
+                    "{$directory}/{$codGeneracion}.json",
+                ];
+
+                // Verificar la existencia del ticket
+                $ticketFile = "{$directory}/{$codGeneracion}_ticket.pdf";
+                if (Storage::exists($ticketFile)) {
+                    $files[] = $ticketFile;
+                }
+
+                // Agregar los archivos al ZIP
+                foreach ($files as $file) {
+                    if (Storage::exists($file)) {
+                        $zip->addFile(Storage::path($file), "{$fechaProcesamiento}/{$codGeneracion}/" . basename($file));
+                    }
+                }
+            }
+
+            // Cerrar el archivo ZIP
+            $zip->close();
+
+            // Descargar el archivo ZIP
+            return response()->download($zipFilePath)->deleteFileAfterSend(true);
+        } else {
+            return response()->json(['error' => 'No se pudo crear el archivo ZIP'], 500);
+        }
+    }
+
+
 }

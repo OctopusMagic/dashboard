@@ -17,6 +17,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('invoices.index') }}">Documentos Emitidos</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('invoices.compile') }}">Descargar DTEs</a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

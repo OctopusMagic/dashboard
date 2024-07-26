@@ -10,7 +10,7 @@ class InvoicesController extends Controller
     public function index()
     {
         if(request()->has('fecha')){
-            $response = Http::get('http://localhost:8000/dtes/?fecha_inicio=' . request('fecha') . '&fecha_fin=' . request('fecha'));
+            $response = Http::get('http://localhost:8000/dtes/?fecha_inicio=' . request('fecha') . ' 00:00:00&fecha_fin=' . request('fecha'). ' 23:59:59');
         } else {
             $response = Http::get('http://localhost:8000/dtes/');
         }
@@ -37,5 +37,10 @@ class InvoicesController extends Controller
         $dtes = $response->json();
 
         
+    }
+
+    public function compile_dtes()
+    {
+        return view('download');
     }
 }
