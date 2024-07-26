@@ -13,7 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens(except: [
             '/enviar_dte',
-            '/upload-files'
+            '/upload-files',
+            '/send-contingency'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

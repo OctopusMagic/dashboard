@@ -33,7 +33,12 @@
                             <div class="row">
                                 <div class="col-lg-4"></div>
                                 <div class="col-lg-4">
-                                    <h1 class="header-title text-center">Documentos Emitidos</h1>
+                                    <h1 class="header-title text-center">
+                                        Documentos Emitidos
+                                        @if($fecha)
+                                            : {{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}
+                                        @endif
+                                    </h1>
                                 </div>
                             </div>
                         </div>

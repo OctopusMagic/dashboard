@@ -10,3 +10,24 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    /* Bootstrap modal has a z-index of 1050, so we use the same */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Initially hidden */
+}
+
+.loading-overlay .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}

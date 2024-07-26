@@ -55,4 +55,10 @@ class DteController extends Controller
         $headers = get_headers($url, 1);
         return strpos($headers[0], '200') !== false;
     }
+
+    public function sendContingencia()
+    {
+        $response = Http::post("http://localhost:8000/contingencia/auto");
+        return $response->json();
+    }
 }
