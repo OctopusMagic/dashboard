@@ -16,7 +16,12 @@ class DteMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $receptor;
     protected $codGeneracion;
+    protected $numeroControl;
+    protected $selloRecibido;
+    protected $fhProcesamiento;
+    protected $estado;
     protected $pdfPath;
     protected $jsonPath;
 
@@ -25,9 +30,22 @@ class DteMail extends Mailable
      *
      * @return void
      */
-    public function __construct($codGeneracion, $pdfPath, $jsonPath)
+    public function __construct(
+        $codGeneracion,
+        $receptor,
+        $numeroControl,
+        $selloRecibido,
+        $fhProcesamiento,
+        $estado,
+        $pdfPath,
+        $jsonPath)
     {
         $this->codGeneracion = $codGeneracion;
+        $this->receptor = $receptor;
+        $this->numeroControl = $numeroControl;
+        $this->selloRecibido = $selloRecibido;
+        $this->fhProcesamiento = $fhProcesamiento;
+        $this->estado = $estado;
         $this->pdfPath = $pdfPath;
         $this->jsonPath = $jsonPath;
     }
@@ -39,10 +57,15 @@ class DteMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Facturación Electrónica')
+        return $this->subject('Documento Tributario Electrónico')
             ->view('mail.dte')
             ->with([
                 'codGeneracion' => $this->codGeneracion,
+                'receptor' => $this->receptor,
+                'numeroControl' => $this->numeroControl,
+                'selloRecibido' => $this->selloRecibido,
+                'fhProcesamiento' => $this->fhProcesamiento,
+                'estado' => $this->estado,
             ])
             ->attach($this->pdfPath)
             ->attach($this->jsonPath);
