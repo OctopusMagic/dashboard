@@ -195,6 +195,120 @@
                         </tfoot>
                     </table>
                 </div>
+                <div class="row my-4">
+                    <div class="col-lg-12 mb-5">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h2>Estadísticas</h2>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <a href="/invoices?fecha={{ date('Y-m-d') }}"
+                                    class="card mb-2 text-decoration-none">
+                                    <div class="card-body bg-light btn shadow">
+                                        <div class="row py-2 justify-content-center">
+                                            <div class="col-3">
+                                                <br>
+                                                <i class="fas fa-file text-info fa-4x fa-4x"></i>
+                                            </div>
+                                            <div class="col-9">
+                                                <h2 class="card-title">{{ $statistics['total'] }}</h2>
+                                                <p class="card-text h6">Documentos<br>Generados</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <a href="/invoices?type=ANULADO&fecha={{ date('Y-m-d') }}"
+                                    class="card mb-2 text-decoration-none">
+                                    <div class="card-body bg-light btn shadow">
+                                        <div class="row py-2 justify-content-center">
+                                            <div class="col-3">
+                                                <br>
+                                                <i class="fas fa-file-circle-minus text-secondary fa-4x fa-4x"></i>
+                                            </div>
+                                            <div class="col-9">
+                                                <h2 class="card-title">{{ $statistics['anulado'] }}</h2>
+                                                <p class="card-text h6">Documentos<br>Anulados</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <a href="/invoices?type=PROCESADO&fecha={{ date('Y-m-d') }}"
+                                    class="card mb-2 text-decoration-none">
+                                    <div class="card-body bg-light btn shadow">
+                                        <div class="row py-2 justify-content-center">
+                                            <div class="col-3">
+                                                <br>
+                                                <i class="fas fa-file-circle-check text-success fa-4x fa-4x"></i>
+                                            </div>
+                                            <div class="col-9">
+                                                <h2 class="card-title">{{ $statistics['approved'] }}</h2>
+                                                <p class="card-text h6">Documentos<br>Enviados</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <a href="/invoices?type=RECHAZADO&fecha={{ date('Y-m-d') }}"
+                                    class="card mb-2 text-decoration-none">
+                                    <div class="card-body bg-light btn shadow">
+                                        <div class="row py-2 justify-content-center">
+                                            <div class="col-3">
+                                                <br>
+                                                <i class="fas fa-file-circle-xmark text-danger fa-4x fa-4x"></i>
+                                            </div>
+                                            <div class="col-9">
+                                                <h2 class="card-title">{{ $statistics['rejected'] }}</h2>
+                                                <p class="card-text h6">Documentos<br>Rechazados</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <a href="/invoices?type=CONTINGENCIA&fecha={{ date('Y-m-d') }}"
+                                    class="card mb-2 text-decoration-none">
+                                    <div class="card-body bg-light btn shadow">
+                                        <div class="row py-2 justify-content-center">
+                                            <div class="col-3">
+                                                <br>
+                                                <i
+                                                    class="fas fa-file-circle-exclamation text-warning fa-4x fa-4x"></i>
+                                            </div>
+                                            <div class="col-9">
+                                                <h2 class="card-title">{{ $statistics['contingencia'] }}
+                                                </h2>
+                                                <p class="card-text h6">Documentos<br>en Contingencia</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <div class="card mb-2 text-decoration-none">
+                                    <div class="card-body bg-light btn shadow">
+                                        <div class="row py-2 justify-content-center">
+                                            <div class="col-3">
+                                                <br>
+                                                <i class="fas fa-sack-dollar text-success fa-4x fa-4x"></i>
+                                            </div>
+                                            <div class="col-9">
+                                                <h5 class="card-title">
+                                                    ${{ number_format($statistics['total_facturado'], 2) }}
+                                                </h5>
+                                                <p class="card-text h6">Total<br>Facturado</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>F
+                </div>
             </div>
         </div>
     </div>

@@ -11,8 +11,10 @@ class InvoicesController extends Controller
     {
         if(request()->has('fecha')){
             $response = Http::get('http://localhost:8000/dtes/?fecha_inicio=' . request('fecha') . ' 00:00:00&fecha_fin=' . request('fecha'). ' 23:59:59');
+            $statistics = Http::get('http://localhost:8000/dtes/statistics/?fecha=' . request('fecha'));
         } else {
             $response = Http::get('http://localhost:8000/dtes/');
+            $statistics = Http::get('http://localhost:8000/dtes/statistics/');
         }
         $dtes = $response->json();
 
@@ -28,7 +30,7 @@ class InvoicesController extends Controller
             return $dte;
         }, $dtes);
 
-        return view('invoices', ['invoices' => $dtes, 'fecha' => request('fecha')]);
+        return view('invoices', ['invoices' => $dtes, 'fecha' => request('fecha'), 'statistics' => $statistics->json()]);
     }
 
     public function download_dtes()
