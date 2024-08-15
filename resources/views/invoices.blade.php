@@ -27,6 +27,21 @@
         @endif
         <div class="row justify-content-center">
             <div class="col-md-12">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5">
+                        <form action="" id="formConsulta">
+                            <div class="form-group row mb-3">
+                                <label class="col-sm-3 col-form-label" for="fecha">Fecha de Procesamiento:</label>
+                                <div class="col-sm-6">
+                                    <input type="date" class="form-control" id="fecha" name="fecha" value="{{ $fecha }}" required>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="submit" value="Consultar DTEs" class="btn btn-primary">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="row mt-5 mb-2">
                     <div class="col-md-12">
                         <div class="header-content">

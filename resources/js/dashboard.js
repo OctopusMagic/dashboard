@@ -42,7 +42,7 @@ $(function(){
                 ¿Está seguro que desea reconciliar los DTEs?<br>
                 Actualizará los DTEs en el DBF, y si faltara uno, lo agregará<br>
                 <strong>LOS DTE AGREGADOS NO LLEVAN SERIE, DEBERÁ AGREGAR LA SERIE MANUALMENTE</strong><br><br>
-                Ingrese contraseña de Reconcialiación:
+                Ingrese contraseña de Reconciliación:
             `,
             icon: "warning",
             input: "password",
