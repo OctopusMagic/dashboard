@@ -183,9 +183,15 @@
                     </div>
                     <div class="col-lg-7">
                         <div class="d-flex justify-content-between align-items-center">
-                            <p class="h4 align-items-center">Sucursal:</p>
-                            <button type="button" class="btn btn-warning" id="reenviarContingencia">Reenviar
-                                Documentos en Contingencia</button>
+                            <div>
+                                <p class="h4 align-items-center">Sucursal:</p>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-danger" id="reconciliarDBF">Reconciliar DBF</button>
+                                <button type="button" class="btn btn-warning" id="reenviarContingencia">Reenviar
+                                    Documentos en Contingencia</button>
+                            </div>
+                            
                         </div>
                         <hr>
                         <p>
