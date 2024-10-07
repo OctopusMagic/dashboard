@@ -187,6 +187,11 @@
                                 <p class="h4 align-items-center">Sucursal:</p>
                             </div>
                             <div>
+                                @if($contingencia)
+                                    <button type="button" class="btn btn-danger" id="desactivarContingencia">Desactivar Contingencia</button>
+                                @else
+                                    <button type="button" class="btn btn-success" id="activarContingencia">Activar Contingencia</button>
+                                @endif
                                 <button type="button" class="btn btn-danger" id="reconciliarDBF">Reconciliar DBF</button>
                                 <button type="button" class="btn btn-warning" id="reenviarContingencia">Reenviar
                                     Documentos en Contingencia</button>

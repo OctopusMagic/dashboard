@@ -61,3 +61,10 @@
         </div>
     </div>
 </nav>
+@if($contingencia)
+<div class="container mt-2">
+    <div class="h1 alert alert-warning">
+        <strong>Atención!</strong> Contingencia Habilitada, no se están enviando DTEs a Hacienda
+    </div>
+</div>
+@endif

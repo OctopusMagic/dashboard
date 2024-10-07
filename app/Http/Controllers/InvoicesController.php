@@ -18,6 +18,9 @@ class InvoicesController extends Controller
         }
         $dtes = $response->json();
 
+        $contingencia = Http::get('http://localhost:8000/contingencia/estado')->json();
+        $contingencia = $contingencia['message'];
+
         // Check query params to filter invoices
         if (request()->has('type')) {
             $dtes = array_filter($dtes, function ($dte) {
@@ -30,7 +33,7 @@ class InvoicesController extends Controller
             return $dte;
         }, $dtes);
 
-        return view('invoices', ['invoices' => $dtes, 'fecha' => request('fecha'), 'statistics' => $statistics->json()]);
+        return view('invoices', ['invoices' => $dtes, 'fecha' => request('fecha'), 'statistics' => $statistics->json(), 'contingencia' => $contingencia]);
     }
 
     public function download_dtes()
@@ -43,6 +46,8 @@ class InvoicesController extends Controller
 
     public function compile_dtes()
     {
-        return view('download');
+        $contingencia = Http::get('http://localhost:8000/contingencia/estado')->json();
+        $contingencia = $contingencia['message'];
+        return view('download', ['contingencia' => $contingencia]);
     }
 }
