@@ -70,14 +70,15 @@
                     <table class="table table-bordered table-hover table-striped w-100 align-middle" id="invoicesTable">
                         <thead>
                             <tr class="align-middle text-center">
-                                <th style="width: 5%;">ID</th>
-                                <th style="width: 10%;">Tipo de Documento</th>
-                                <th style="width: 15%;">Información Hacienda</th>
-                                <th style="width: 15%;">Información Receptor</th>
-                                <th style="width: 10%;">Fecha Procesamiento</th>
-                                <th style="width: 10%;">Estado</th>
-                                <th style="width: 15%;">Observaciones</th>
-                                <th style="width: 20%;">Acciones</th>
+                                <th style="width: 4%;">ID</th>
+                                <th style="width: 10%">Fecha de Emisión</th>
+                                <th style="width: 8%;">Tipo de Documento</th>
+                                <th style="width: 14%;">Información Hacienda</th>
+                                <th style="width: 14%;">Información Receptor</th>
+                                <th style="width: 9%;">Fecha Procesada</th>
+                                <th style="width: 9%;">Estado</th>
+                                <th style="width: 14%;">Observaciones</th>
+                                <th style="width: 18%;">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,6 +91,9 @@
                                     <tr>
                                 @endif
                                 <td>{{ $invoice['id'] }}</td>
+                                <td>
+                                    {{$invoice['documento']->identificacion->fecEmi}} {{ $invoice['documento']->identificacion->horEmi }}
+                                </td>
                                 <td>{{ $tiposDte[$invoice['tipo_dte']] }}</td>
                                 <td class="small">
                                     <p>
@@ -191,6 +195,7 @@
                         <tfoot>
                             <tr class="align-middle text-center">
                                 <th>ID</th>
+                                <th>Fecha de Emisión</th>
                                 <th>Tipo de Documento</th>
                                 <th>Información Hacienda</th>
                                 <th>Información Receptor</th>
