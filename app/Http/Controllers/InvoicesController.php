@@ -9,9 +9,15 @@ class InvoicesController extends Controller
 {
     public function index()
     {
-        if(request()->has('fecha')){
-            $response = Http::get('http://localhost:8000/dtes/?fecha_inicio=' . request('fecha') . ' 00:00:00&fecha_fin=' . request('fecha'). ' 23:59:59');
-            $statistics = Http::get('http://localhost:8000/dtes/statistics/?fecha=' . request('fecha'));
+        if(request()->has('fecha') && request()->has('hasta')){
+            $response = Http::get('http://localhost:8000/dtes/?fecha_inicio=' . request('fecha') .'&fecha_fin=' . request('hasta'));
+            $statistics = Http::get('http://localhost:8000/dtes/statistics/?fecha_inicio=' . request('fecha') .'&fecha_fin=' . request('hasta'));
+        } elseif(request()->has('fecha')){
+            $fecha = \Carbon\Carbon::parse(request('fecha'));
+            $fecha_inicio = $fecha->startOfDay()->toDateTimeString();
+            $fecha_fin = $fecha->endOfDay()->toDateTimeString();
+            $response = Http::get('http://localhost:8000/dtes/?fecha_inicio=' . $fecha_inicio . '&fecha_fin=' . $fecha_fin);
+            $statistics = Http::get('http://localhost:8000/dtes/statistics/?fecha_inicio=' . $fecha_inicio . '&fecha_fin=' . $fecha_fin);
         } else {
             $response = Http::get('http://localhost:8000/dtes/');
             $statistics = Http::get('http://localhost:8000/dtes/statistics/');
@@ -33,7 +39,13 @@ class InvoicesController extends Controller
             return $dte;
         }, $dtes);
 
-        return view('invoices', ['invoices' => $dtes, 'fecha' => request('fecha'), 'statistics' => $statistics->json(), 'contingencia' => $contingencia]);
+        return view('invoices', [
+            'invoices' => $dtes,
+            'fecha' => request('fecha'),
+            'hasta' => request('hasta'),
+            'statistics' => $statistics->json(),
+            'contingencia' => $contingencia
+        ]);
     }
 
     public function download_dtes()

@@ -24,9 +24,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $today = date('Y-m-d');
+        $fecha_inicio = \Carbon\Carbon::now()->startOfDay()->toDateTimeString();
+        $fecha_fin = \Carbon\Carbon::now()->endOfDay()->toDateTimeString();
         $statistics = Http::get('http://localhost:8000/dtes/statistics/')->json();
-        $statistics_today = Http::get("http://localhost:8000/dtes/statistics/?fecha=$today")->json();
+        $statistics_today = Http::get("http://localhost:8000/dtes/statistics/?fecha_inicio=$fecha_inicio&fecha_fin=$fecha_fin")->json();
         $datos_empresa = Http::get('http://localhost:8000/datos_empresa/1')->json();
 
         $contingencia = Http::get('http://localhost:8000/contingencia/estado')->json();

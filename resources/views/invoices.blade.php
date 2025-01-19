@@ -30,13 +30,20 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-5">
                         <form action="" id="formConsulta">
-                            <div class="form-group row mb-3">
-                                <label class="col-sm-3 col-form-label" for="fecha">Fecha de Procesamiento:</label>
-                                <div class="col-sm-6">
-                                    <input type="date" class="form-control" id="fecha" name="fecha" value="{{ $fecha }}" required>
+                            <div class="row">
+                                <div class="form-group col-sm-3 mb-3">
+                                    <label class="form-label" for="fecha">Desde:</label>
+                                    <input type="datetime-local" class="form-control" id="fecha" name="fecha"
+                                        value="{{ $fecha }}" required>
                                 </div>
-                                <div class="col-sm-3">
-                                    <input type="submit" value="Consultar DTEs" class="btn btn-primary">
+                                <div class="form-group col-sm-3 mb-3">
+                                    <label class="form-label" for="fecha">Hasta:</label>
+                                    <input type="datetime-local" class="form-control" id="hasta" name="hasta"
+                                        value="{{ $hasta }}" required>
+                                </div>
+                                <div class="form-group col-sm-3 text-center">
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Consultar DTEs</button>
                                 </div>
                             </div>
                         </form>
@@ -50,7 +57,7 @@
                                 <div class="col-lg-4">
                                     <h1 class="header-title text-center">
                                         Documentos Emitidos
-                                        @if($fecha)
+                                        @if ($fecha)
                                             : {{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}
                                         @endif
                                     </h1>
@@ -202,8 +209,7 @@
                                 <h2>Estadísticas</h2>
                             </div>
                             <div class="col-md-2 text-center">
-                                <a href="/invoices?fecha={{ date('Y-m-d') }}"
-                                    class="card mb-2 text-decoration-none">
+                                <a href="/invoices?fecha={{ date('Y-m-d') }}" class="card mb-2 text-decoration-none">
                                     <div class="card-body bg-light btn shadow">
                                         <div class="row py-2 justify-content-center">
                                             <div class="col-3">
@@ -276,8 +282,7 @@
                                         <div class="row py-2 justify-content-center">
                                             <div class="col-3">
                                                 <br>
-                                                <i
-                                                    class="fas fa-file-circle-exclamation text-warning fa-4x fa-4x"></i>
+                                                <i class="fas fa-file-circle-exclamation text-warning fa-4x fa-4x"></i>
                                             </div>
                                             <div class="col-9">
                                                 <h2 class="card-title">{{ $statistics['contingencia'] }}
